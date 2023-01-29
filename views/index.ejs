@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima</title>
+    <link rel="icon" href="../images/logo.ico">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-div">
+            <div class="brand-logo-div">
+                <img class="brand-logo" src="../images/logo.png" alt="">
+                <p class="spaced-text">Clima</p>
+            </div>
+            <div class="nav-items">
+                <form action="/city" method="post" class="city-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="cityInput" class="search-box input-field" placeholder="city" autocomplete="off">
+                        <button class="submit-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+                <form action="/lat" method="post" class="lat-form hidden">
+                    <div class="input-wrapper">
+                        <input type="number" name="latInput" class="input-field search-lat" placeholder="latitude" step="any">
+                        <input type="number" name="lonInput" class="input-field search-lat search-lon" placeholder="longitude" step="any">
+                        <button class="submit-btn lat-submit" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+                <button class="btn" id="getLocation" data-work="getLocation"><i class="fa-sharp fa-solid fa-location-dot"></i></button>
+                <button class="btn" id="lat-toggle" class="txt-btn" data-work="lat-toggle"><i class="fa-solid fa-rotate-left"></i></button>
+                <button  id="city-toggle" class="txt-btn btn hidden" data-work="city-toggle"><i class="fa-solid fa-rotate-left"></i></button>
+            </div>
+        </div>
+    </nav>
+    <section id="content">
+        <div class="container">
+            <div class="weather-icon-dev">
+                <img class="weather-icon" src=<%= weatherIcon %> alt="">
+            </div>
+            <div class="description-div">
+                <p class="temperature"><%= temperature %></p>
+                <p class="description"><%= description %></p>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <p>Humidity</p>
+                        </div>
+                        <div class="card-body">
+                            <p><%= humidity %></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <p>Pressure</p>
+                        </div>
+                        <div class="card-body">
+                            <p><%= pressure %></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <p>Wind</p>
+                        </div>
+                        <div class="card-body">
+                            <p><%= windSpeed %></p>
+                            <p><%= windDeg %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://kit.fontawesome.com/fbad2c2e3a.js" crossorigin="anonymous"></script>
+    <script src="../javascript/frontend.js"></script>
+</body>
+</html>
