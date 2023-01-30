@@ -31,7 +31,7 @@ exports.getWeatherLat = async (APIKEY, lat, lon)=>{
         axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${APIKEY}&lat=${lat}&units=metric&lon=${lon}`)
         .then(response =>{
             const r = response.data
-            setData(`http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`, `${r.main.temp}°C`,`It feels ${r.weather[0].description}`,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`)
+            setData(`http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`, `${r.main.temp}°C`,`${r.weather[0].description}`,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`)
             resolve(dataObj)
         })
     })

@@ -14,13 +14,13 @@ app.set("view engine", "ejs")
 const port = process.env.PORT || 3000
 const APIKEY = require("./apikey.js").APIKEY
 let dataObj = {
-    weatherIcon : " ",
-    temperature : "",
-    description : "",
-    humidity : "",
-    pressure : "",
-    windDeg : "",
-    windSpeed : "" 
+    weatherIcon : "",
+    temperature : "!!!",
+    description : "Enter the city or corrdinates",
+    humidity : "0",
+    pressure : "0",
+    windDeg : "0",
+    windSpeed : "0" 
 }
 //server
 //home route
