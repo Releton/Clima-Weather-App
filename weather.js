@@ -1,4 +1,5 @@
 const axios = require('axios').default
+//constants
 const dataObj = {
     weatherIcon : " ",
     temperature : "",
@@ -35,7 +36,7 @@ exports.getWeatherLat = async (APIKEY, lat, lon)=>{
         })
     })
 }
-
+//functions
 function setData(weatherIcon, temperature, description, humidity, pressure, windDeg, windSpeed){
     dataObj.weatherIcon =  weatherIcon
     dataObj.temperature = temperature

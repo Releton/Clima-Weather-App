@@ -52,5 +52,4 @@ app.post("/lat", async (req, res)=>{
         res.redirect("/")
     }
 })
-
 app.listen(3000, ()=> console.log(`Server started at port ${port}`))
