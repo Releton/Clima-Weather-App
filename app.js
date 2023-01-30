@@ -2,6 +2,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
+const { createBrotliCompress } = require('zlib')
+const weather = require(__dirname + "/weather.js")
 //server creation
 const app = express()
 app.use(express.static("public"))
@@ -10,20 +12,45 @@ app.set("view engine", "ejs")
 
 //constants
 const port = process.env.PORT || 3000
-const APIKEY = fs.readFileSync("./apikey.txt").toString()
-const data = {
-    weatherIcon : " http://openweathermap.org/img/wn/10d@2x.png",
-    temperature : "30",
-    description : "This is a description",
-    humidity : "75%",
-    pressure : "1077mbar",
-    windDeg : "13deg",
-    windSpeed : "69km/hr" 
+const APIKEY = require("./apikey.js").APIKEY
+let dataObj = {
+    weatherIcon : " ",
+    temperature : "",
+    description : "",
+    humidity : "",
+    pressure : "",
+    windDeg : "",
+    windSpeed : "" 
 }
 //server
 //home route
-app.get("/", (req, res)=>{
-    res.render("index", data)
+app.get("/", async (req, res)=>{
+    res.render("index", dataObj)
+})
+
+//city route
+app.post("/city", async (req, res)=>{
+    const cityName = req.body.cityInput
+    try{
+        dataObj = await weather.getWeatherCity(APIKEY, cityName)
+    }
+    catch(e){}
+    finally{
+        res.redirect("/")
+    }
+})
+
+//latitude route
+app.post("/lat", async (req, res)=>{
+    const lat = req.body.latInput
+    const lon = req.body.lonInput
+    try{
+        dataObj = await weather.getWeatherLat(APIKEY, lat, lon)
+    }
+    catch(e){}
+    finally{
+        res.redirect("/")
+    }
 })
 
 app.listen(3000, ()=> console.log(`Server started at port ${port}`))
