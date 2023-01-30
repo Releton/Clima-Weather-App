@@ -7,7 +7,8 @@ const dataObj = {
     humidity : "",
     pressure : "",
     windDeg : "",
-    windSpeed : "" 
+    windSpeed : "",
+    cityName: "" 
 }
 exports.getWeatherCity = async (APIKEY, cityName)=>{
     return new Promise((resolve, reject)=>{
@@ -15,7 +16,7 @@ exports.getWeatherCity = async (APIKEY, cityName)=>{
         .then( response =>{
             const r = response.data
             setData(`http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`, `${r.main.temp}°C`,`${r.weather[0].description}`
-            ,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`)
+            ,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`,cityName)
             resolve(dataObj)
             return
         })
@@ -31,13 +32,13 @@ exports.getWeatherLat = async (APIKEY, lat, lon)=>{
         axios.get(`https://api.openweathermap.org/data/2.5/weather?appid=${APIKEY}&lat=${lat}&units=metric&lon=${lon}`)
         .then(response =>{
             const r = response.data
-            setData(`http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`, `${r.main.temp}°C`,`${r.weather[0].description}`,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`)
+            setData(`http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`, `${r.main.temp}°C`,`${r.weather[0].description}`,`${r.main.humidity}%`,`${r.main.pressure}mbar`,`${r.wind.deg}°`,`${r.wind.speed}Miles/hr`,`${lat.slice(0,4)} ${lon.slice(0,4)}`)
             resolve(dataObj)
         })
     })
 }
 //functions
-function setData(weatherIcon, temperature, description, humidity, pressure, windDeg, windSpeed){
+function setData(weatherIcon, temperature, description, humidity, pressure, windDeg, windSpeed, cityName){
     dataObj.weatherIcon =  weatherIcon
     dataObj.temperature = temperature
     dataObj.description = description
@@ -45,4 +46,5 @@ function setData(weatherIcon, temperature, description, humidity, pressure, wind
     dataObj.pressure = pressure
     dataObj.windDeg = windDeg
     dataObj.windSpeed = windSpeed
+    dataObj.cityName = cityName
 }

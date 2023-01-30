@@ -20,7 +20,8 @@ let dataObj = {
     humidity : "0",
     pressure : "0",
     windDeg : "0",
-    windSpeed : "0" 
+    windSpeed : "0" ,
+    cityName: "clima"
 }
 //server
 //home route
