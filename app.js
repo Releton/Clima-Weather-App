@@ -1,8 +1,6 @@
 //required
 const express = require('express')
 const bodyParser = require('body-parser')
-const fs = require('fs')
-const { createBrotliCompress } = require('zlib')
 const weather = require(__dirname + "/weather.js")
 //server creation
 const app = express()
